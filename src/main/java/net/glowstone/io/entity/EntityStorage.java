@@ -2,6 +2,7 @@ package net.glowstone.io.entity;
 
 import net.glowstone.GlowWorld;
 import net.glowstone.entity.GlowEntity;
+import net.glowstone.entity.animals.GlowCow;
 import net.glowstone.io.nbt.NbtSerialization;
 import net.glowstone.util.nbt.CompoundTag;
 import org.bukkit.Location;
@@ -37,6 +38,9 @@ public final class EntityStorage {
     static {
         bind(new PlayerStore());
         bind(new ItemStore());
+        bind(new AgeableStore<>(GlowCow.class, "Cow"));
+        bind(new PigStore());
+        bind(new ZombieStore());
     }
 
     /**
@@ -80,6 +84,10 @@ public final class EntityStorage {
 
         // create the entity instance and read the rest of the data
         return createEntity(store, location, compound);
+    }
+
+    public static <T extends GlowEntity> T createEntity(Class<T> clazz, Location location) {
+        return (T) createEntity(find(clazz, "create"), location, null);
     }
 
     /**
