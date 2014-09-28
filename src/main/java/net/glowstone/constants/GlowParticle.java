@@ -38,16 +38,22 @@ public final class GlowParticle {
      * @throws IllegalArgumentException if data is provided incorrectly
      */
     public static int[] getData(Particle particle, MaterialData material) {
-        if (material != null && !particle.usesMaterial()) {
-            throw new IllegalArgumentException("Particle " + particle + " does not use material, " + material + " provided");
-        } else if (material == null && particle.usesMaterial()) {
-            throw new IllegalArgumentException("Particle " + particle + " requires material, null provided");
-        }
-
-        if (material == null) {
-            return EMPTY;
-        } else {
-            return new int[]{material.getItemType().getId(), material.getData()};
+        switch (particle) {
+            case ITEM_BREAK:
+            case BLOCK_BREAK:
+            case BLOCK_DUST:
+                if (material == null) {
+                    throw new IllegalArgumentException("Particle " + particle + " requires material, null provided");
+                }
+                if (particle == ITEM_BREAK) {
+                    return new int[]{material.getItemTypeId(), material.getData()};
+                }
+                return new int[]{material.getItemTypeId()};
+            default:
+                if (material != null) {
+                    throw new IllegalArgumentException("Particle " + particle + " does not use material, " + material + " provided");
+                }
+                return EMPTY;
         }
     }
 
@@ -57,43 +63,48 @@ public final class GlowParticle {
 
     static {
         Arrays.fill(ids, -1);
-        // todo: confirm these numbers
-        set(SMALL_SMOKE, 0);
-        set(LARGE_EXPLOSION, 1);
-        set(HUGE_EXPLOSION, 2);
+        set(SMOKE_SMALL, 0); // explosion normal
+        set(EXPLOSION_LARGE, 1);
+        set(EXPLOSION_HUGE, 2);
         set(FIREWORKS_SPARK, 3);
         set(BUBBLES, 4);
-        set(FISH_WAKE, 5);
-        set(SPLASH, 6);
-        set(UNDERWATER, 7); // "SUSPEND"
+        set(WATER_WAKE, 5);
+        set(WATER_SPLASH, 6);
+        set(UNDERWATER, 7); // suspend
+        set(VOID_FOG, 8); // depth suspend
         set(TOWN_AURA, 8);
         set(CRITICAL, 9);
-        set(MAGIC_CRITICAL, 10);
+        set(CRITICAL_MAGIC, 10);
         set(SMOKE, 11);
-        set(LARGE_SMOKE, 12);
-        set(POTION_SWIRL, 13);
-        set(INSTANT_SPELL, 14);
-        set(SPELL, 15);
-        set(POTION_SWIRL_TRANSPARENT, 16); // ???
-        set(WITCH_MAGIC, 17);
-        set(WATER_DRIP, 18);
-        set(LAVA_DRIP, 19);
-        set(ANGRY_VILLAGER, 20);
-        set(HAPPY_VILLAGER, 21);
-        set(VOID_FOG, 22); // "DEPTH_SUSPEND"
+        set(SMOKE_LARGE, 12);
+        set(SPELL, 13);
+        set(SPELL_INSTANT, 14);
+        set(SPELL_MOB, 15);
+        set(SPELL_AMBIENT, 16);
+        set(SPELL_WITCH, 17);
+        set(DRIP_WATER, 18);
+        set(DRIP_LAVA, 19);
+        set(VILLAGER_ANGRY, 20);
+        set(VILLAGER_HAPPY, 21);
+        set(TOWN_AURA, 22);
         set(NOTE, 23);
         set(PORTAL, 24);
-        set(FLYING_GLYPH, 25);
+        set(ENCHANTMENT_TABLE, 25);
         set(FLAME, 26);
         set(LAVA_POP, 27);
         set(FOOTSTEP, 28);
         set(CLOUD, 29);
-        set(COLORED_DUST, 30);
-        set(SNOWBALL_BREAK, 31);
+        set(REDSTONE, 30);
+        set(SNOWBALL, 31);
         set(SNOW_SHOVEL, 32);
         set(SLIME, 33);
         set(HEART, 34);
-        // 35: barrier
-        // todo: the three usesMaterial particles
+        set(BARRIER, 35);
+        set(ITEM_BREAK, 36);
+        set(BLOCK_BREAK, 37);
+        set(BLOCK_DUST, 38);
+        set(WATER_DROPLET, 39);
+        set(ITEM_TAKE, 40);
+        set(MOB_APPEARANCE, 41);
     }
 }
