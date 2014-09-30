@@ -72,7 +72,6 @@ public final class GlowParticle {
         set(WATER_SPLASH, 6);
         set(UNDERWATER, 7); // suspend
         set(VOID_FOG, 8); // depth suspend
-        set(TOWN_AURA, 8);
         set(CRITICAL, 9);
         set(CRITICAL_MAGIC, 10);
         set(SMOKE, 11);
