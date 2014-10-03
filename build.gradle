@@ -103,6 +103,7 @@ dependencies {
     //compile 'mysql:mysql-connector-java:5.1.14'
     //compile 'org.xerial:sqlite-jdbc:3.7.2'
     compile 'org.slf4j:slf4j-jdk14:1.7.7'
+    compile 'org.projectlombok:lombok:1.14.8'
     testCompile 'junit:junit:4.8.1'
 }
 
