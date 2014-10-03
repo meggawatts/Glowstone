@@ -68,8 +68,8 @@ public final class GlowParticle {
         set(EXPLOSION_HUGE, 2);
         set(FIREWORKS_SPARK, 3);
         set(BUBBLES, 4);
-        set(WATER_WAKE, 5);
-        set(WATER_SPLASH, 6);
+        set(WATER_SPLASH, 5);
+        set(WATER_WAKE, 6);
         set(UNDERWATER, 7); // suspend
         set(VOID_FOG, 8); // depth suspend
         set(CRITICAL, 9);
