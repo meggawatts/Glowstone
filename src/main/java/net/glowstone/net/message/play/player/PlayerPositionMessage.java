@@ -2,11 +2,9 @@ package net.glowstone.net.message.play.player;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.ToString;
 import org.bukkit.Location;
 
 @Getter
-@ToString
 @EqualsAndHashCode(callSuper = true)
 public final class PlayerPositionMessage extends PlayerUpdateMessage {
 
@@ -24,6 +22,16 @@ public final class PlayerPositionMessage extends PlayerUpdateMessage {
         location.setX(x);
         location.setY(y);
         location.setZ(z);
+    }
+
+    @Override
+    public String toString() {
+        return "PlayerPositionMessage(" +
+                "onGround=" + isOnGround() +
+                ", x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                ')';
     }
 
 }
